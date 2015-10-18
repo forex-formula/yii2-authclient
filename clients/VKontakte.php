@@ -113,6 +113,9 @@ class VKontakte extends OAuth2
      */
     protected function normalizeUserAttributes($attributes)
     {
+        if (array_key_exists('domain',$attributes)){
+            $attributes['domain'] = 'http://vk.com/'.$attributes['domain'];
+        }
         $attributes = parent::normalizeUserAttributes($attributes);
         $attributes['email'] = $this->getAccessToken()->getParam('email');
         return $attributes;
